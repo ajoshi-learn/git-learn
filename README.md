@@ -30,3 +30,23 @@ Create new branch:
 Change branch:
 
 `git checkout newImage`
+
+## Branches and Merging
+
+The first method to combine work that we will examine is `git merge`. Merging in Git creates a special commit that has two unique parents. A commit with two parents essentially means "I want to include all the work from this parent over here and this one over here, and the set of all their parents."
+
+![new commit](img/4.jpg)
+
+`git merge bugFix`
+
+![new commit](img/5.jpg)
+
+## Git Rebase
+
+The second way of combining work between branches is rebasing. Rebasing essentially takes a set of commits, "copies" them, and plops them down somewhere else.
+
+![new commit](img/6.jpg)
+
+`git rebase master`
+
+![new commit](img/7.jpg)
