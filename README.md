@@ -50,3 +50,79 @@ The second way of combining work between branches is rebasing. Rebasing essentia
 `git rebase master`
 
 ![new commit](img/7.jpg)
+
+## HEAD
+
+First we have to talk about "HEAD". HEAD is the symbolic name for the currently checked out commit -- it's essentially what commit you're working on top of.
+
+HEAD always points to the most recent commit which is reflected in the working tree. Most git commands which make changes to the working tree will start by changing HEAD.
+
+Normally HEAD points to a branch name (like bugFix). When you commit, the status of bugFix is altered and this change is visible through HEAD.
+
+### Detaching HEAD
+
+Detaching HEAD just means attaching it to a commit instead of a branch. This is what it looks like beforehand:
+
+HEAD -> master -> C1
+
+![new commit](img/8.jpg)
+
+`git checkout C1`
+
+![new commit](img/9.jpg)
+
+## Relative Refs
+
+Moving around in Git by specifying commit hashes can get a bit tedious. In the real world you won't have a nice commit tree visualization next to your terminal, so you'll have to use `git log` to see hashes.
+
+Furthermore, hashes are usually a lot longer in the real Git world as well. For instance, the hash of the commit that introduced the previous level is `fed2da64c0efc5293610bdd892f82a58e8cbc5d8`.
+
+The upside is that Git is smart about hashes. It only requires you to specify enough characters of the hash until it uniquely identifies the commit. So I can type `fed2` instead of the long string above.
+
+Specifying commits by their hash isn't the most convenient thing ever, which is why Git has relative refs.
+
+Relative commits are powerful, but we will introduce two simple ones here:
+
+* Moving upwards one commit at a time with `^`
+
+![new commit](img/10.jpg)
+
+`git checkout master^`
+
+![new commit](img/11.jpg)
+
+* Moving upwards a number of times with `~<num>`
+
+![new commit](img/12.jpg)
+
+`git checkout HEAD~4`
+
+![new commit](img/13.jpg)
+
+You can directly reassign a branch to a commit with the `-f` option. So something like:
+
+`git branch -f master HEAD~3`
+
+moves (by force) the master branch to three parents behind HEAD.
+
+## Reversing Changes in Git
+
+There are many ways to reverse changes in Git. And just like committing, reversing changes in Git has both a low-level component (staging individual files or chunks) and a high-level component (how the changes are actually reversed).
+
+There are two primary ways to undo changes in Git -- one is using `git reset` and the other is using `git revert`. We will look at each of these in the next dialog
+
+### Git reset
+
+![new commit](img/14.jpg)
+
+`git reset HEAD^`
+
+![new commit](img/15.jpg)
+
+### Git revert
+
+![new commit](img/16.jpg)
+
+`git revert HEAD`
+
+![new commit](img/17.jpg)
